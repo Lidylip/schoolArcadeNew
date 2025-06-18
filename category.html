@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Categories - School Arcade</title>
+    <meta name="description" content="Browse all game categories on School Arcade - Puzzle, Action, Racing, Adventure and more">
+    <meta name="keywords" content="game categories, online games, free games, puzzle games, action games">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">🎮</span>
+                        </div>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            School Arcade
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-2xl mx-8">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" id="searchInput" 
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500" 
+                               placeholder="Search for games...">
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="category.html" class="text-blue-600 font-medium">Categories</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button class="text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <!-- Category Grid -->
+        <div id="categoryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Categories will be loaded here by JavaScript -->
+        </div>
+
+        <!-- Selected Category Games -->
+        <div id="selectedCategorySection" class="hidden mt-8">
+            <div class="mb-6">
+                <h2 id="selectedCategoryTitle" class="text-3xl font-bold text-gray-800 mb-2"></h2>
+                <p id="selectedCategoryDescription" class="text-gray-600"></p>
+            </div>
+            
+            <div id="selectedCategoryGames" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <!-- Selected category games will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">🎮</span>
+                        </div>
+                        <span class="text-2xl font-bold">School Arcade</span>
+                    </div>
+                    <p class="text-gray-300 mb-4 max-w-md">
+                        The best platform for free online games. Discover thousands of high-quality games and enjoy endless entertainment.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="category.html" class="text-gray-400 hover:text-white transition-colors">Categories</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 School Arcade. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="games/game-data.js?v=2024123105"></script>
+    <script src="js/script.js?v=2024123105"></script>
+    <script>
+        // Category page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategoryPage();
+            setupCategorySearch();
+        });
+
+        // Load category page
+        function loadCategoryPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedCategoryId = urlParams.get('cat');
+            
+            if (selectedCategoryId) {
+                // Show specific category
+                showSpecificCategory(selectedCategoryId);
+            } else {
+                // Show all categories
+                showAllCategories();
+            }
+        }
+
+        // Show all categories
+        function showAllCategories() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            const selectedSection = document.getElementById('selectedCategorySection');
+            
+            categoryGrid.innerHTML = '';
+            selectedSection.classList.add('hidden');
+            
+            gameCategories.forEach(category => {
+                const categoryGames = games.filter(game => game.categories.includes(category.id));
+                if (categoryGames.length === 0) return;
+                
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer';
+                categoryCard.onclick = () => showSpecificCategory(category.id);
+                
+                const bg = getCategoryBackground(category.id);
+                
+                categoryCard.innerHTML = `
+                    <div class="h-32 bg-gradient-to-br ${bg.gradient} flex items-center justify-center">
+                        <div class="text-white text-4xl">${bg.icon}</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${category.name}</h3>
+                        <p class="text-gray-600 mb-4">${category.description}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">${categoryGames.length}</span>
+                            <span class="text-gray-500">games</span>
+                        </div>
+                    </div>
+                `;
+                
+                categoryGrid.appendChild(categoryCard);
+            });
+        }
+
+        // Show specific category
+        function showSpecificCategory(categoryId) {
+            const category = gameCategories.find(cat => cat.id === categoryId);
+            if (!category) return;
+            
+            const categoryGames = games.filter(game => game.categories.includes(categoryId));
+            
+            // Hide category grid and show selected category section
+            document.getElementById('categoryGrid').classList.add('hidden');
+            const selectedSection = document.getElementById('selectedCategorySection');
+            selectedSection.classList.remove('hidden');
+            
+            // Update category info
+            document.getElementById('selectedCategoryTitle').textContent = category.name;
+            document.getElementById('selectedCategoryDescription').textContent = `${category.description} • ${categoryGames.length} games`;
+            
+            // Load games
+            const gamesContainer = document.getElementById('selectedCategoryGames');
+            gamesContainer.innerHTML = '';
+            
+            categoryGames.forEach(game => {
+                const gameCard = createGameCard(game);
+                gamesContainer.appendChild(gameCard);
+            });
+            
+            // Update URL
+            history.pushState({}, '', `?cat=${categoryId}`);
+        }
+
+        // Clear category selection
+        function clearCategorySelection() {
+            document.getElementById('categoryGrid').classList.remove('hidden');
+            document.getElementById('selectedCategorySection').classList.add('hidden');
+            history.pushState({}, '', window.location.pathname);
+        }
+
+        // Get category background
+        function getCategoryBackground(categoryId) {
+            const backgrounds = {
+                'puzzle': { gradient: 'from-blue-500 to-blue-700', icon: '🧩' },
+                'action': { gradient: 'from-red-500 to-red-700', icon: '⚔️' },
+                'racing': { gradient: 'from-orange-500 to-orange-700', icon: '🏎️' },
+                'adventure': { gradient: 'from-green-500 to-green-700', icon: '🗺️' },
+                'sports': { gradient: 'from-purple-500 to-purple-700', icon: '⚽' },
+                'strategy': { gradient: 'from-indigo-500 to-indigo-700', icon: '♛' },
+                'arcade': { gradient: 'from-pink-500 to-pink-700', icon: '🕹️' },
+                'shooting': { gradient: 'from-gray-500 to-gray-700', icon: '🎯' },
+                'dressup': { gradient: 'from-rose-500 to-rose-700', icon: '👗' }
+            };
+            return backgrounds[categoryId] || backgrounds['puzzle'];
+        }
+
+        // Setup category search
+        function setupCategorySearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                
+                if (query === '') {
+                    // If no search query, return to normal view
+                    if (document.getElementById('selectedCategorySection').classList.contains('hidden')) {
+                        showAllCategories();
+                    }
+                    return;
+                }
+                
+                // Search for matching games across all categories
+                const matchingGames = games.filter(game => 
+                    game.title.toLowerCase().includes(query) ||
+                    game.shortDescription.toLowerCase().includes(query) ||
+                    game.tags.some(tag => tag.toLowerCase().includes(query))
+                );
+                
+                // Show search results
+                showSearchResults(matchingGames, query);
+            });
+        }
+
+        // Show search results
+        function showSearchResults(results, query) {
+            // Hide category grid and show selected section for search results
+            document.getElementById('categoryGrid').classList.add('hidden');
+            const selectedSection = document.getElementById('selectedCategorySection');
+            selectedSection.classList.remove('hidden');
+            
+            // Update title and description for search
+            document.getElementById('selectedCategoryTitle').textContent = `Search Results`;
+            document.getElementById('selectedCategoryDescription').textContent = `Found ${results.length} games for "${query}"`;
+            
+            // Load search results
+            const gamesContainer = document.getElementById('selectedCategoryGames');
+            gamesContainer.innerHTML = '';
+            
+            if (results.length === 0) {
+                gamesContainer.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-6xl mb-4">🔍</div>
+                        <h3 class="text-xl font-semibold text-gray-600">No games found</h3>
+                        <p class="text-gray-500 mt-2">Try different keywords!</p>
+                    </div>
+                `;
+            } else {
+                results.forEach(game => {
+                    const gameCard = createGameCard(game);
+                    gamesContainer.appendChild(gameCard);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

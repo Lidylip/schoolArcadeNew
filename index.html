@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Arcade - Free Online Games for Everyone</title>
+    <meta name="description" content="Play the best free online games at School Arcade. Puzzle games, action games, racing games and more. No downloads required!">
+    <link rel="canonical" href="https://schoolarcade.com">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-blue-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🎮</span>
+                    </div>
+                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        School Arcade
+                    </a>
+                    <!-- 在标题旁边直接显示游戏统计 -->
+                    <div class="hidden md:flex items-center space-x-4 ml-6 text-sm">
+                        <div class="bg-blue-50 px-3 py-1 rounded-full">
+                            <span class="font-bold text-blue-600" id="totalGames">33</span>
+                            <span class="text-blue-500 ml-1">Games</span>
+                        </div>
+                        <div class="bg-green-50 px-3 py-1 rounded-full">
+                            <span class="font-bold text-green-600">Free</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-2xl mx-8">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Search games by name, description, or tags..." 
+                            class="w-full px-4 py-2 pl-10 pr-4 text-gray-700 bg-gray-100 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        />
+                        <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search and Stats -->
+        <div class="sm:hidden px-4 pb-4">
+            <div class="space-y-3">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="searchInputMobile"
+                        placeholder="Search games..." 
+                        class="w-full px-4 py-2 pl-10 pr-4 text-gray-700 bg-gray-100 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <!-- 移动端统计信息 -->
+                <div class="flex justify-center space-x-4 text-sm">
+                    <div class="bg-blue-50 px-3 py-1 rounded-full">
+                        <span class="font-bold text-blue-600" id="totalGamesMobile">33</span>
+                        <span class="text-blue-500 ml-1">Games</span>
+                    </div>
+                    <div class="bg-green-50 px-3 py-1 rounded-full">
+                        <span class="font-bold text-green-600">Free</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Categories with Games - 主要内容区域 -->
+    <section class="pt-6 pb-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">🎯 Game Categories</h2>
+                <button onclick="openCategorySidebar()" class="text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1 transition-colors">
+                    <span>View All</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Categories with Games Container -->
+            <div id="categoriesWithGamesContainer">
+                <!-- Categories and their games will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Games -->
+    <section id="featuredGames" class="py-8 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">🌟 Featured Games</h2>
+                <p class="text-lg text-gray-600">Hand-picked games that players love the most</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featuredGamesContainer">
+                <!-- Featured games will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Games -->
+    <section class="py-8 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">🆕 Latest Games</h2>
+                <p class="text-lg text-gray-600">Fresh games added to our collection</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="latestGamesContainer">
+                <!-- Latest games will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results -->
+    <section class="py-16 bg-gray-50 hidden" id="searchResults">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Search Results</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="searchResultsContainer">
+                <!-- Search results will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 分类侧边栏 -->
+    <div id="categorySidebar" class="fixed inset-y-0 left-0 z-50 w-80 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <!-- 侧边栏头部 -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold flex items-center space-x-2">
+                    <span>🎮</span>
+                    <span>Game Categories</span>
+                </h3>
+                <button onclick="closeCategorySidebar()" class="text-white hover:text-gray-200 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="text-blue-100 text-sm mt-2">Click category to quickly jump to the homepage</p>
+        </div>
+        
+        <!-- 分类列表 -->
+        <div class="p-4 space-y-3 max-h-screen overflow-y-auto" id="categoryList">
+            <!-- 分类项将通过JavaScript动态加载 -->
+        </div>
+    </div>
+
+    <!-- 侧边栏遮罩层 -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="closeCategorySidebar()"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">🎮</span>
+                        </div>
+                        <h3 class="text-2xl font-bold">School Arcade</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        The ultimate destination for free online gaming. Play instantly without downloads!
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="category.html" class="text-gray-400 hover:text-white transition-colors">All Categories</a></li>
+                        <li><a href="#featuredGames" class="text-gray-400 hover:text-white transition-colors">Featured Games</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Game Types</h4>
+                    <ul class="space-y-2">
+                        <li><a href="category.html?cat=puzzle" class="text-gray-400 hover:text-white transition-colors">Puzzle Games</a></li>
+                        <li><a href="category.html?cat=action" class="text-gray-400 hover:text-white transition-colors">Action Games</a></li>
+                        <li><a href="category.html?cat=racing" class="text-gray-400 hover:text-white transition-colors">Racing Games</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 School Arcade. All rights reserved. Play responsibly!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="games/game-data.js?v=2024123107"></script>
+    <script src="js/script.js?v=2024123107"></script>
+</body>
+</html>

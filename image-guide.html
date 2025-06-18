@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏图片获取指南 - PlayArcade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto py-8 px-4">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">🖼️ 游戏图片快速获取指南</h1>
+            
+            <!-- 方法1: 自动截图 -->
+            <div class="mb-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4">🤖 方法1: 自动截图 (最推荐)</h2>
+                <p class="text-gray-700 mb-4">在添加游戏工具中直接使用自动截图功能，最方便快捷！</p>
+                
+                <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold mb-2">📋 使用步骤:</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>在"添加游戏"页面填写游戏名称和iframe链接</li>
+                        <li>选择"🤖 自动截图"选项</li>
+                        <li>点击"📸 生成截图"按钮</li>
+                        <li>系统自动生成游戏截图</li>
+                    </ol>
+                </div>
+                
+                <div class="mt-4 p-3 bg-green-100 rounded border border-green-300">
+                    <p class="text-green-800 text-sm">
+                        <strong>优点:</strong> 完全自动化，无需手动操作，图片尺寸标准(400x300)，质量一致
+                    </p>
+                </div>
+            </div>
+
+            <!-- 方法2: 从游戏网站截图 -->
+            <div class="mb-8 p-6 bg-green-50 rounded-lg border border-green-200">
+                <h2 class="text-2xl font-bold text-green-800 mb-4">📸 方法2: 手动截图上传</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold mb-2">🖥️ 电脑端截图:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                            <li><strong>Windows:</strong> Win + Shift + S</li>
+                            <li><strong>Mac:</strong> Cmd + Shift + 4</li>
+                            <li><strong>Chrome:</strong> F12 → 设备模拟器截图</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold mb-2">📱 在线截图工具:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                            <li><a href="https://www.screenpresso.com" class="text-blue-600">Screenpresso</a></li>
+                            <li><a href="https://app.prntscr.com" class="text-blue-600">LightShot</a></li>
+                            <li><a href="https://snipping-tool.en.softonic.com" class="text-blue-600">Snipping Tool</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold mb-2">☁️ 免费图床推荐:</h3>
+                    <div class="grid md:grid-cols-3 gap-3">
+                        <a href="https://imgbb.com" class="p-3 border rounded hover:bg-gray-50 text-center">
+                            <div class="font-medium text-blue-600">ImgBB</div>
+                            <div class="text-xs text-gray-500">免费，稳定</div>
+                        </a>
+                        <a href="https://imgur.com" class="p-3 border rounded hover:bg-gray-50 text-center">
+                            <div class="font-medium text-blue-600">Imgur</div>
+                            <div class="text-xs text-gray-500">知名，快速</div>
+                        </a>
+                        <a href="https://postimages.org" class="p-3 border rounded hover:bg-gray-50 text-center">
+                            <div class="font-medium text-blue-600">PostImages</div>
+                            <div class="text-xs text-gray-500">简单，直接</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方法3: 从游戏库复制 -->
+            <div class="mb-8 p-6 bg-yellow-50 rounded-lg border border-yellow-200">
+                <h2 class="text-2xl font-bold text-yellow-800 mb-4">🔍 方法3: 从游戏源站获取</h2>
+                
+                <div class="bg-white p-4 rounded-lg border mb-4">
+                    <h3 class="font-semibold mb-2">🎯 常用方法:</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li><strong>右键检查:</strong> 在游戏页面右键"检查元素"，找到图片标签复制链接</li>
+                        <li><strong>开发者工具:</strong> F12 → Network → 刷新页面 → 找到图片文件</li>
+                        <li><strong>查看源码:</strong> Ctrl+U 搜索 ".jpg" 或 ".png"</li>
+                        <li><strong>谷歌图片:</strong> 搜索"游戏名 + screenshot"获取高质量截图</li>
+                    </ol>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold mb-2">🎮 游戏网站图片源:</h3>
+                    <div class="grid md:grid-cols-2 gap-3 text-sm">
+                        <div>
+                            <strong>国外站点:</strong>
+                            <ul class="list-disc list-inside text-gray-600 mt-1">
+                                <li>CrazyGames.com</li>
+                                <li>Poki.com</li>
+                                <li>Y8.com</li>
+                                <li>Armor Games</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>国内站点:</strong>
+                            <ul class="list-disc list-inside text-gray-600 mt-1">
+                                <li>4399.com</li>
+                                <li>7k7k.com</li>
+                                <li>2144.com</li>
+                                <li>17173小游戏</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方法4: 智能占位图 -->
+            <div class="mb-8 p-6 bg-purple-50 rounded-lg border border-purple-200">
+                <h2 class="text-2xl font-bold text-purple-800 mb-4">🎨 方法4: 智能占位图</h2>
+                
+                <p class="text-gray-700 mb-4">如果找不到合适的图片，可以使用系统生成的占位图，后期再替换。</p>
+                
+                <div class="bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold mb-2">✨ 占位图特色:</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>根据游戏分类自动选择配色方案</li>
+                        <li>显示游戏名称，美观实用</li>
+                        <li>标准尺寸(400x300)，完美适配</li>
+                        <li>支持中文显示，清晰易读</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4 bg-white p-4 rounded-lg border">
+                    <h3 class="font-semibold mb-2">🎨 分类配色:</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-purple-500 rounded"></div>
+                            <span>益智游戏 - 紫色</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-red-500 rounded"></div>
+                            <span>动作游戏 - 红色</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                            <span>竞速游戏 - 蓝色</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-green-500 rounded"></div>
+                            <span>休闲游戏 - 绿色</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-yellow-500 rounded"></div>
+                            <span>冒险游戏 - 黄色</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                            <span>体育游戏 - 橙色</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 实用技巧 -->
+            <div class="mb-8 p-6 bg-gray-50 rounded-lg border">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">💡 实用技巧</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold mb-2 text-green-600">✅ 推荐做法:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                            <li>图片尺寸: 400x300 或 16:9 比例</li>
+                            <li>文件格式: JPG/PNG</li>
+                            <li>文件大小: 500KB以内</li>
+                            <li>图片内容: 游戏实际画面截图</li>
+                            <li>避免包含UI界面，专注游戏内容</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold mb-2 text-red-600">❌ 避免事项:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                            <li>避免使用过大的图片文件</li>
+                            <li>不要使用有版权争议的图片</li>
+                            <li>避免模糊或低质量图片</li>
+                            <li>不要使用不相关的图片</li>
+                            <li>避免包含个人信息的截图</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 工具推荐 -->
+            <div class="p-6 bg-indigo-50 rounded-lg border border-indigo-200">
+                <h2 class="text-2xl font-bold text-indigo-800 mb-4">🛠️ 推荐工具</h2>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold text-indigo-600 mb-2">截图工具</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• Snipaste (Windows/Mac)</li>
+                            <li>• Lightshot</li>
+                            <li>• ShareX (Windows)</li>
+                            <li>• 微信截图 (Alt+A)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold text-indigo-600 mb-2">图片处理</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• TinyPNG (压缩)</li>
+                            <li>• Canva (编辑)</li>
+                            <li>• GIMP (免费编辑)</li>
+                            <li>• 美图秀秀 (简单编辑)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-semibold text-indigo-600 mb-2">图床服务</h3>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• ImgBB (推荐)</li>
+                            <li>• Imgur</li>
+                            <li>• SM.MS</li>
+                            <li>• 七牛云 (需注册)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 返回按钮 -->
+            <div class="mt-8 text-center">
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    ← 返回首页
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
