@@ -1,17 +1,41 @@
 // School Arcade - Free Online Games
 // Interactive features for the gaming website
 
+// Global variables to store game data
+let games = [];
+let gameCategories = [];
+let gameStats = {};
+
+// Load game data from JSON file
+async function loadGameData() {
+    try {
+        const response = await fetch('/js/game-data.json');
+        const data = await response.json();
+        console.log('Loaded game data:', data);
+        games = data.games;
+        gameCategories = data.gameCategories;
+        gameStats = data.gameStats;
+        
+        // Initialize the UI after data is loaded
+        loadCategoriesWithGames();
+        loadFeaturedGames();
+        loadLatestGames();
+        updateGameStats();
+        setupSearch();
+    } catch (error) {
+        console.error('Error loading game data:', error);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+            errorMessage.textContent = '加载游戏数据时出错，请刷新页面重试。';
+            errorMessage.classList.remove('hidden');
+        }
+    }
+}
+
 // Wait for page to load
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page DOM loaded successfully');
-    console.log('Game data:', typeof games !== 'undefined' ? games.length + ' games found' : 'Game data not found');
-    console.log('Category data:', typeof gameCategories !== 'undefined' ? gameCategories.length + ' categories found' : 'Category data not found');
-    
-    loadCategoriesWithGames();
-    loadFeaturedGames();
-    loadLatestGames();
-    updateGameStats();
-    setupSearch();
+    loadGameData();
 });
 
 // Category background image configuration - Y8.com style

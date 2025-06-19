@@ -139,9 +139,87 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="games/game-data.js?v=2025061807"></script>
+    <script>
+        // Global variables to store game data
+        let games = [];
+        let gameCategories = [];
+        let gameStats = {};
+
+        // Load game data from JSON file
+        async function loadGameData() {
+            try {
+                const response = await fetch('js/game-data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                games = data.games;
+                gameCategories = data.gameCategories;
+                gameStats = data.gameStats;
+                
+                console.log('Game data loaded successfully:', {
+                    gamesCount: games.length,
+                    categoriesCount: gameCategories.length
+                });
+                
+                // Initialize the page after data is loaded
+                loadCategoryPage();
+                setupCategorySearch();
+            } catch (error) {
+                console.error('Error loading game data:', error);
+                // Show error message to user
+                document.getElementById('selectedCategoryGames').innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-6xl mb-4">❌</div>
+                        <h3 class="text-xl font-semibold text-gray-600">Failed to load games</h3>
+                        <p class="text-gray-500 mt-2">Please check your internet connection and try again.</p>
+                        <p class="text-sm text-red-500 mt-2">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load data when page loads - single initialization point
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGameData();
+        });
+    </script>
     <script src="js/script.js?v=2025061807"></script>
     <script>
+        // Create game card function
+        function createGameCard(game) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all';
+            
+            const categoryName = gameCategories.find(cat => cat.id === game.categories[0])?.name || 'Game';
+            
+            card.innerHTML = `
+                <div class="relative pb-[56.25%]">
+                    <img src="${game.image}" alt="${game.title}" 
+                         class="absolute inset-0 w-full h-full object-cover"
+                         onerror="this.src='https://via.placeholder.com/300x200/6b7280/ffffff?text=🎮'">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-800 mb-1 truncate">${game.title}</h3>
+                    <p class="text-sm text-gray-600 mb-2 line-clamp-2">${game.shortDescription}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">${categoryName}</span>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>${game.rating}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add click handler to open game
+            card.addEventListener('click', () => {
+                window.location.href = `game.html?id=${game.id}`;
+            });
+            
+            return card;
+        }
+
         // Category page specific functionality
         document.addEventListener('DOMContentLoaded', function() {
             loadCategoryPage();
@@ -152,6 +230,12 @@
         function loadCategoryPage() {
             const urlParams = new URLSearchParams(window.location.search);
             const selectedCategoryId = urlParams.get('cat');
+            
+            // Make sure games data is loaded
+            if (!games || !games.length) {
+                console.warn('Games data not loaded yet');
+                return;
+            }
             
             if (selectedCategoryId) {
                 // Show specific category
@@ -201,9 +285,13 @@
         // Show specific category
         function showSpecificCategory(categoryId) {
             const category = gameCategories.find(cat => cat.id === categoryId);
-            if (!category) return;
+            if (!category) {
+                console.error('Category not found:', categoryId);
+                return;
+            }
             
             const categoryGames = games.filter(game => game.categories.includes(categoryId));
+            console.log(`Found ${categoryGames.length} games for category ${categoryId}`);
             
             // Hide category grid and show selected category section
             document.getElementById('categoryGrid').classList.add('hidden');
@@ -212,16 +300,27 @@
             
             // Update category info
             document.getElementById('selectedCategoryTitle').textContent = category.name;
-            document.getElementById('selectedCategoryDescription').textContent = `${category.description} • ${categoryGames.length} games`;
+            document.getElementById('selectedCategoryDescription').textContent = 
+                `${category.description} • ${categoryGames.length} games`;
             
             // Load games
             const gamesContainer = document.getElementById('selectedCategoryGames');
             gamesContainer.innerHTML = '';
             
-            categoryGames.forEach(game => {
-                const gameCard = createGameCard(game);
-                gamesContainer.appendChild(gameCard);
-            });
+            if (categoryGames.length === 0) {
+                gamesContainer.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-6xl mb-4">🎮</div>
+                        <h3 class="text-xl font-semibold text-gray-600">No games found</h3>
+                        <p class="text-gray-500 mt-2">Check back later for new games in this category!</p>
+                    </div>
+                `;
+            } else {
+                categoryGames.forEach(game => {
+                    const gameCard = createGameCard(game);
+                    gamesContainer.appendChild(gameCard);
+                });
+            }
             
             // Update URL
             history.pushState({}, '', `?cat=${categoryId}`);

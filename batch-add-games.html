@@ -216,7 +216,30 @@
     </main>
 
     <!-- JavaScript -->
-    <script src="games/game-data.js"></script>
+    <script>
+        // Global variables to store game data
+        let games = [];
+        let gameCategories = [];
+        let gameStats = {};
+
+        // Load game data from JSON file
+        async function loadGameData() {
+            try {
+                const response = await fetch('/js/game-data.json');
+                const data = await response.json();
+                games = data.games;
+                gameCategories = data.gameCategories;
+                gameStats = data.gameStats;
+            } catch (error) {
+                console.error('Error loading game data:', error);
+            }
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGameData();
+        });
+    </script>
     <script src="js/batch-add-games.js"></script>
 </body>
 </html> 

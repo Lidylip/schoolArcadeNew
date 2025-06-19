@@ -631,154 +631,47 @@ function addGamesToDatabase(newGames) {
     // Show added games in the UI
     showAddedGames(newGames);
     
-    // Generate the updated game-data.js content
+    // Generate the updated game-data.json file with new games
     generateAndDownloadGameData(newGames);
 }
 
-// Generate updated game-data.js file with new games
+// Generate updated game-data.json file with new games
 function generateAndDownloadGameData(newGames) {
-    console.log('Generating updated game-data.js file...');
+    console.log('Generating updated game-data.json file...');
     
     // Create the complete games array including existing and new games
     const allGames = [...games];
     
-    // Generate the JavaScript file content
-    const gameDataContent = generateGameDataFileContent(allGames);
-    
+    // Generate the JSON file content
+    const gameData = {
+        games: allGames,
+        gameCategories: gameCategories,
+        gameStats: {
+            totalGames: allGames.length,
+            lastUpdated: new Date().toLocaleDateString(),
+            featuredGames: allGames.filter(game => game.featured).length,
+            totalPlays: allGames.reduce((sum, game) => sum + game.plays, 0),
+            averageRating: (allGames.reduce((sum, game) => sum + game.rating, 0) / allGames.length).toFixed(1),
+            categoryCounts: gameCategories.reduce((acc, category) => {
+                acc[category.id] = allGames.filter(game => game.categories.includes(category.id)).length;
+                return acc;
+            }, {})
+        }
+    };
+
     // Create and download the file
-    const blob = new Blob([gameDataContent], { type: 'text/javascript' });
+    const blob = new Blob([JSON.stringify(gameData, null, 2)], { type: 'application/json' });
     const url = window.URL.createObjectURL(blob);
     
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'game-data.js';
+    a.download = 'game-data.json';
     a.click();
     
     window.URL.revokeObjectURL(url);
     
     // Show instructions to user
     showFileUpdateInstructions(newGames.length);
-}
-
-// Generate the complete game-data.js file content
-function generateGameDataFileContent(allGames) {
-    const content = `// PlayArcade Game Database
-// Core game data file for your gaming website
-
-// Game Categories Definition
-const gameCategories = [
-    {
-        id: 'puzzle',
-        name: 'Puzzle Games',
-        icon: '🧩',
-        color: 'from-purple-500 to-pink-600',
-        description: 'Challenge your mind with brain-teasing puzzles and logic games'
-    },
-    {
-        id: 'action',
-        name: 'Action Games',
-        icon: '⚔️',
-        color: 'from-red-500 to-orange-600',
-        description: 'Fast-paced adventures and thrilling combat experiences'
-    },
-    {
-        id: 'racing',
-        name: 'Racing Games',
-        icon: '🏎️',
-        color: 'from-blue-500 to-cyan-600',
-        description: 'Speed through exciting tracks and compete for the finish line'
-    },
-    {
-        id: 'casual',
-        name: 'Casual Games',
-        icon: '🎯',
-        color: 'from-green-500 to-teal-600',
-        description: 'Easy-to-play games perfect for quick entertainment'
-    },
-    {
-        id: 'adventure',
-        name: 'Adventure Games',
-        icon: '🗺️',
-        color: 'from-indigo-500 to-purple-600',
-        description: 'Explore new worlds and embark on epic journeys'
-    },
-    {
-        id: 'sports',
-        name: 'Sports Games',
-        icon: '🏀',
-        color: 'from-orange-500 to-red-600',
-        description: 'Compete in your favorite sports and athletic challenges'
-    },
-    {
-        id: 'dress-up',
-        name: 'Dress Up Games',
-        icon: '👗',
-        color: 'from-pink-500 to-rose-600',
-        description: 'Fashion and styling games for creative expression'
-    }
-];
-
-// Game Database - Enhanced version with multiple games per category
-const games = [
-${allGames.map(game => generateGameObject(game)).join(',\n')}
-];
-
-// Game Statistics - Auto-calculated
-const gameStats = {
-    totalGames: games.length,
-    lastUpdated: new Date().toLocaleDateString(),
-    featuredGames: games.filter(game => game.featured).length,
-    totalPlays: games.reduce((sum, game) => sum + game.plays, 0),
-    averageRating: (games.reduce((sum, game) => sum + game.rating, 0) / games.length).toFixed(1),
-    categoryCounts: gameCategories.reduce((acc, category) => {
-        acc[category.id] = games.filter(game => game.categories.includes(category.id)).length;
-        return acc;
-    }, {})
-};
-
-// Export for use in other files
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { games, gameCategories, gameStats };
-}
-
-// Expose variables to global scope in browser environment
-if (typeof window !== 'undefined') {
-    window.games = games;
-    window.gameCategories = gameCategories;
-    window.gameStats = gameStats;
-}`;
-
-    return content;
-}
-
-// Generate a single game object string
-function generateGameObject(game) {
-    return `    {
-        id: '${game.id}',
-        title: '${escapeString(game.title)}',
-        shortDescription: '${escapeString(game.shortDescription)}',
-        fullDescription: \`${escapeBackticks(game.fullDescription)}\`,
-        image: '${game.image}',
-        iframe: '${game.iframe}',
-        categories: [${game.categories.map(cat => `'${cat}'`).join(', ')}],
-        tags: [${game.tags.map(tag => `'${escapeString(tag)}'`).join(', ')}],
-        rating: ${game.rating},
-        plays: ${game.plays},
-        featured: ${game.featured},
-        playTime: '${escapeString(game.playTime)}'
-    }`;
-}
-
-// Escape strings for JavaScript
-function escapeString(str) {
-    if (!str) return '';
-    return str.replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-}
-
-// Escape backticks for template literals
-function escapeBackticks(str) {
-    if (!str) return '';
-    return str.replace(/`/g, '\\`').replace(/\$/g, '\\$');
 }
 
 // Show instructions for updating the file
@@ -798,86 +691,35 @@ function showFileUpdateInstructions(gameCount) {
                 <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                     <div class="flex items-center mb-2">
                         <i class="fas fa-check-circle text-green-600 mr-2"></i>
-                        <span class="font-semibold text-green-800">Successfully processed ${gameCount} games!</span>
+                        <span class="font-semibold text-green-800">Successfully added ${gameCount} new games!</span>
                     </div>
-                    <p class="text-green-700 text-sm">All games have been validated and added to the database with proper formatting.</p>
+                    <p class="text-green-700">A new game-data.json file has been generated and downloaded.</p>
                 </div>
                 
-                <div class="mb-6">
-                    <h4 class="text-lg font-semibold text-gray-800 mb-3">📋 Installation Steps:</h4>
-                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-800 rounded-full text-xs flex items-center justify-center mr-3 mt-0.5 font-bold">1</span>
-                            <div>
-                                <strong>Download Complete:</strong> The updated <code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">game-data.js</code> file has been downloaded to your computer
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-800 rounded-full text-xs flex items-center justify-center mr-3 mt-0.5 font-bold">2</span>
-                            <div>
-                                <strong>Backup Original:</strong> Make a backup copy of your current <code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">PlayArcade/games/game-data.js</code> file
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-800 rounded-full text-xs flex items-center justify-center mr-3 mt-0.5 font-bold">3</span>
-                            <div>
-                                <strong>Replace File:</strong> Replace the original file with the newly downloaded version
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-800 rounded-full text-xs flex items-center justify-center mr-3 mt-0.5 font-bold">4</span>
-                            <div>
-                                <strong>Refresh Website:</strong> Clear your browser cache and refresh your website to see the new games
-                            </div>
-                        </li>
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-gray-800">Next Steps:</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>Locate the downloaded <code class="bg-gray-100 px-2 py-1 rounded">game-data.json</code> file in your downloads folder</li>
+                        <li>Replace the existing file in your <code class="bg-gray-100 px-2 py-1 rounded">School Arcade/js/</code> directory</li>
+                        <li>Refresh your website to see the new games</li>
                     </ol>
-                </div>
-                
-                <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
-                    <div class="flex items-start">
-                        <i class="fas fa-exclamation-triangle text-amber-600 mr-2 mt-0.5"></i>
-                        <div>
-                            <p class="text-amber-800 font-semibold mb-1">Important Reminder:</p>
-                            <p class="text-amber-700 text-sm">This is a client-side solution. For production websites, consider implementing a proper backend API to handle game data persistence automatically.</p>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                            <p class="text-blue-800">The changes will take effect after you replace the file and refresh the website.</p>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-3 gap-4 text-center">
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="text-2xl font-bold text-gray-800">${games.length}</div>
-                        <div class="text-sm text-gray-600">Total Games</div>
-                    </div>
-                    <div class="bg-green-50 rounded-lg p-4">
-                        <div class="text-2xl font-bold text-green-800">+${gameCount}</div>
-                        <div class="text-sm text-green-600">Just Added</div>
-                    </div>
-                    <div class="bg-blue-50 rounded-lg p-4">
-                        <div class="text-2xl font-bold text-blue-800">${gameCategories.length}</div>
-                        <div class="text-sm text-blue-600">Categories</div>
                     </div>
                 </div>
             </div>
             
-            <div class="p-6 border-t border-gray-200 flex justify-between">
-                <button onclick="this.closest('.fixed').remove()" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center">
-                    <i class="fas fa-times mr-2"></i>
-                    Close
+            <div class="p-6 border-t border-gray-200 bg-gray-50 flex justify-end">
+                <button onclick="this.closest('.fixed').remove()" class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                    Got it!
                 </button>
-                <div class="space-x-3">
-                    <button onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center">
-                        <i class="fas fa-plus mr-2"></i>
-                        Add More Games
-                    </button>
-                    <button onclick="window.open('index.html', '_blank')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center">
-                        <i class="fas fa-home mr-2"></i>
-                        View Website
-                    </button>
-                </div>
             </div>
         </div>
     `;
-    
     document.body.appendChild(modal);
 }
 
